@@ -1,0 +1,563 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,600');
+:root{
+    --primary: #0E2A47;
+    --secondary:rgb(241, 160, 9);
+}
+body{
+    margin: 0;
+    background-color: #f3f3f3;
+    font-family: 'Work Sans', sans-serif;
+}
+.container {
+    margin: 3rem;
+}
+
+.current-user
+{
+    border: 1px solid var(--secondary);
+}
+
+.heading
+{
+    color:white;
+    text-align: center;
+    background-image: url(../styles/media/Rect-Light.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-direction: column;
+    border-bottom: 5px var(--secondary) solid;
+    border-radius: 0px 0px 10px 10px;
+    height: max-content;
+    position: relative;
+}
+
+.admin-mark
+{
+    width: 12px;
+    height: 12px;
+    background-color: var(--secondary);
+    border-radius: 50%;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+.am-sm
+{
+    right: .5rem;
+    top: .5rem;
+    width: 9px;
+    height: 9px;
+}
+
+.co-learning-spaces
+{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 20px;
+    place-items: center;
+    padding: 2rem;
+}
+
+.back-btn{
+    position: absolute;
+    left: 0;
+    margin: 20px;
+    cursor: pointer;
+    color: #e9e5e5;
+    transition: all .2s;
+}
+.back-btn:hover{
+    color: white;
+}
+.back-btn:active{
+    color: #e9e5e5;
+}
+.card {
+    border: 1px solid #ccc;
+    text-align: center;
+    transition: all .3s;
+    max-width: 300px;
+    width: 100%;
+    aspect-ratio: 1/1.4;
+    position: relative;
+    overflow: hidden;
+    height: max-content;
+    border-radius:0 30px;
+    border-bottom: 5px var(--secondary) solid;
+    border-right: 1px var(--secondary) solid;
+
+}
+.card:hover{
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.041);
+}
+.card-thumbnail{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    left:0;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+}
+.card-bottom-section{
+    position: absolute;
+    z-index: 3;
+    bottom: 0;
+    right: auto;
+    height: max-content;
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+}
+.card-details{
+    padding-top: .5rem;
+    border-radius: 0px 40px 0 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.041);
+    background-color: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+}
+.dtl{
+    display: flex;
+    flex-direction: column;
+}
+.card-btn, .join-leave-btn{
+    all: unset;
+    color: black;
+    width:85%;
+    transition: all .3s;
+    height: 0;
+    overflow: hidden;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 1.5rem;
+    border-radius: 20px;
+    background-image: url(../styles/media/Rect-Light.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.card:hover .card-btn{
+    height: max-content;
+    padding: .75rem 0rem;
+    background-color: var(--primary);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+    color: rgb(250, 171, 24);
+}
+.card:hover .card-btn:active{
+    box-shadow: 0 0px 1px rgba(0,0,0,0.5);
+    transition: all .1s;
+}
+.card-btn:hover{
+    cursor: pointer;
+}
+.card-title {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.card-logo{
+    color: white;
+    background-color: var(--primary);
+    padding: .5rem;
+    transition: all .1s;
+    border: var(--secondary) solid 2px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.card:hover .card-logo{
+    padding: .6rem;
+}
+  
+.members {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.last-update {
+margin-top: 5px;
+font-size: 14px;
+color: #888;
+}
+
+.learning-space-title {
+text-align: center;
+}
+.join-leave-btn, .editBtn{
+    all: unset;
+    background-color: #f3f3f3;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding: .5rem 2rem;
+    color: var(--primary);
+    border-radius: 12pc;
+    border-bottom: 5px solid var(--secondary);
+    transition: all .3s;
+    cursor: pointer;
+}
+.join-leave-btn:hover,  .editBtn:hover{
+    color: white;
+    background-color: var(--secondary);
+}
+.join-leave-btn:active,  .editBtn:active{
+    transition: all .1s;
+    transform: scale(.9);
+}
+.ls-body{
+    display: grid;
+    margin-top: 2rem;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 20px;
+    height: 75%;
+}
+.preq, .posts-container, .users
+{
+    padding: 1rem;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    height: max-content;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.ls-body h3
+{
+    margin-block-start:.5rem;
+}
+.posts
+{
+    background-color: #f3f3f3;
+    overflow-y: scroll;
+    min-height: 300px;
+    max-height: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: .5rem;
+    border-radius: 5px;
+}
+
+.posts::-webkit-scrollbar
+{
+    width: 12px;
+}
+
+.posts::-webkit-scrollbar-thumb
+{
+    background-color: #b1b1b1;
+    border-radius: 12pc;
+}
+
+.posts::-webkit-scrollbar-thumb:hover
+{
+    background-color: #858585;
+}
+
+.post-prof-pic
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.post-prof-pic img
+{
+    width:50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius:50%;
+    aspect-ratio: 1/1;
+    border: 2px solid var(--secondary);
+    margin-right: .7rem;
+}
+.post-card
+{
+    padding: .5rem;
+    background-color: white;
+    border-radius: 5px;
+    position: relative;
+}
+.sticky{
+    position: sticky;
+    top: 12px;
+}
+.post-div{
+    display: flex;
+    flex-direction: column;
+}
+
+.create-post-btn{
+    all: unset;
+    padding: .75rem 1rem;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-image .3s, width .3s;
+    border-radius: 12pc;
+    border-bottom: 4px solid var(--secondary);
+    font-weight: bold;
+}
+
+.bg
+{
+    background-image: url(./media/Shiny\ Overlay.svg);
+    color: white;
+}
+.create-post-btn:hover{
+    color: white;
+    background-color: white;
+    background-image: url(./media/Shiny\ Overlay.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.create-post-btn:active{
+    transition: all 0s;
+    border-bottom: 2px solid var(--secondary);
+}
+.paperclip
+{
+    padding: .75rem;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.137);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.paperclip:active
+{
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0);
+}
+
+.post-text{
+    all: unset;
+    transition: all .1s;
+    height: 0;
+}
+.opentextarea
+{
+    resize: none;
+    border-radius: 2px;
+    margin: 1rem;
+    padding: .4rem;
+    outline: 1px solid #0e29474b;
+    height: max-content;
+}
+.post-text::placeholder
+{
+    color: #8a8a8a;
+}
+.post-text:focus{
+    border: none;
+    outline-style: groove;
+    outline: 1px solid black;
+}
+.post-date
+{
+    color: gray;
+    font-size: small;
+    font-style: italic;
+    display: flex;
+    justify-content: flex-end;
+}
+.sc
+{
+    color: #888;
+    scale: .2;
+}
+.post-user-details
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.post-user-details h5
+{
+    margin: 0;
+}
+
+@media only screen and (max-width:1200px) 
+{
+    .ls-body
+    {
+        grid-template-columns: 1fr;
+    }
+    .preq, .users
+    {
+        position:relative
+    }
+    .container
+    {
+        margin: 1rem;
+    }
+}
+
+.br-12
+{
+    border-radius: 8px;
+}
+
+.users-div
+{
+    background-color: #f3f3f3;
+    height: 300px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: start;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: .3rem;
+}
+
+.users-div::-webkit-scrollbar-thumb
+{
+    background-color: #ccc;
+}
+
+.users-div::-webkit-scrollbar
+{
+    width: 0px;
+}
+.user-div
+{
+    background-color: white;
+    cursor: pointer;
+    width: 100%;
+    transition: all 90ms;
+    padding:.4rem ;
+    text-decoration: none;
+    font-style: unset;
+    color: black;
+    position: relative;
+}
+
+.user-div:hover
+{
+    font-weight: bold;
+    background-color: rgba(241, 160, 9, 0.459);
+    color: var(--primary);
+}
+.user-div:active
+{
+    transform: scale(.99);
+}
+
+.user-details
+{
+    text-align: center;
+    display: flex; 
+    gap: 10px;
+    align-items: center;
+}
+
+.user-details img
+{
+    height: 40px;
+    width: 40px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--secondary);
+}
+
+.rlspc-container
+{   
+    width: 100%;
+    overflow-x: scroll;
+    display: flex;
+    gap: 12px;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+}
+
+
+.rlspc-container::-webkit-scrollbar
+{
+    display: none;
+}
+
+.rlspc-card
+{
+    padding: .5rem;
+    border: 1px solid #ccc;
+    height: 100px;
+    display: flex;
+    gap: 12px;
+    min-width: 300px;
+    scroll-snap-align: start;
+    border-radius: 10px;
+}
+
+.rlspc-card p, h4
+{
+    margin: 0 !important;
+}
+
+.rlspc-card img
+{   
+    width: 33%;
+    height: 100%;
+    content: url(./media/Rect-Light.svg)
+}
+.rlspc-details
+{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.scroll-btn
+{
+    background-color: white;
+    height: max-content;
+    width: max-content;
+    padding-inline: 1rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 2px 5px black;
+}
+.rlspc-nxt-btn, .rlspc-prev-btn
+{
+    position: absolute;
+    display: grid;
+    color: rgb(0, 0, 0);
+    place-items: center;
+    right: 0;
+    top: 0;
+    z-index: 3;
+    height: 100%;
+    width: 10%;
+    min-width: 60px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.rlspc-prev-btn
+{
+    left: 0;
+} 
+.rlspc-prev-btn:hover, .rlspc-nxt-btn:hover
+{
+    color: white;
+    background-image: linear-gradient(to right,  rgba(0, 0, 0, 0.712), rgba(0, 0, 0, 0.027));
+}
+.rlspc-nxt-btn:hover
+{
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.027), rgb(0, 0, 0,  0.712));
+}
+.rlspc-div
+{
+    position: relative;
+}

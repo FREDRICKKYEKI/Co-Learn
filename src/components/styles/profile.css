@@ -1,0 +1,215 @@
+@import url('https://fonts.cdnfonts.com/css/trebuchet-ms-2');
+.profile-div
+{
+    font-family: 'Trebuchet MS', sans-serif;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 5rem;
+    position: relative;
+}
+
+.header
+{
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.body
+{
+    width: 80%;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.bio, .details
+{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.details
+{
+    order: 1;
+}
+
+.bio
+{
+    order: 3;
+}
+
+.profilepic-div
+{
+    flex: .5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    order: 2;
+}
+
+.profile-inner
+{
+    width: 100%;
+    position: relative;
+    border-radius: 50%;
+}
+
+.profilepic
+{
+    border-radius: 50%;
+    transition: all .3s;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1/1;
+    border: 3px solid var(--secondary);
+
+}
+
+
+.profile-inner i:active
+{
+    background-color: rgb(245, 245, 245);
+}
+.inner-div
+{
+    width: 100%;
+    height: 100%;
+}
+
+.tagclass input::placeholder
+{
+    color: black;
+}
+
+.tagclass input
+{
+    outline: gray 1px solid;
+    border-radius: 2px;
+}
+
+.tag-no-input input
+{
+    display: none;
+}
+
+
+.tagclass input:focus
+{
+    background-color: rgba(255, 255, 255, 0.3);
+    outline-style: groove;
+    outline-color: var(--secondary);
+    box-shadow: 0px 0px 5px 1px var(--secondary);
+    border: 0px solid rgb(122, 122, 122);
+}
+
+.tagclass .react-tagsinput-tag
+{
+    background-color: var(--primary);
+    color: rgb(255, 255, 255);
+    padding: .75rem .5rem;
+    border-radius: 10px;
+    font-weight: bold;
+    border-bottom: 2px var(--secondary) solid; 
+    font-family: 'Trebuchet MS', sans-serif;
+    min-width: 3rem;
+    text-align: center;
+}
+
+.taginput
+{
+    width: 95%;
+}
+
+.editBtn
+{
+    margin-top: 30px;
+    width: max-content;
+}
+
+@media only screen and (max-width: 800px)
+{
+    .body
+    {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .bio, .details
+    {
+        width: 100%;
+    }
+
+    .inner-div
+    {
+        width: 100%;
+    }
+
+    .profilepic-div
+    {
+        width: 60%;
+        order: 1;
+    }
+
+    .details
+    {
+        order: 2;
+    }
+
+    .bio
+    {
+        order: 3;
+    }
+}
+
+.i
+{
+    font-style: italic;
+    color: gray;
+    font-size: medium;
+}
+
+.logout
+{
+    width: max-content;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    color: black;
+    transition: all .2s;
+    padding: .35rem;
+    border-bottom: 3px solid var(--secondary);
+}
+
+.fa-sign-out
+{
+    font-size: 30px;
+    transform: rotate(180deg);
+}
+
+.logout:hover
+{
+  color: #002958;
+}
+
+@media only screen and (max-width: 500px) 
+{
+    .logout
+    {
+        right: 10px;
+    }
+}

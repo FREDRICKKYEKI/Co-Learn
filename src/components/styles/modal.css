@@ -1,0 +1,115 @@
+.overlay
+{
+    padding: 3rem;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index:2;
+    top:0;
+    background-color: rgba(0, 25, 78, 0.507);
+    display: grid;
+    place-items: center;
+    animation: fade-in 1 .3s;   
+    z-index: 1000;
+    overflow-y: scroll;
+}
+
+.modal
+{
+    transition: all .2s;
+    background: white;
+    max-width: 500px;
+    width: 100%;
+    height: max-content;
+    border: rgb(168, 168, 168) 1px solid;
+    border-radius: 5px;
+    padding: 17px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    animation: slide-top 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.picdiv
+{
+    max-width: 120px;
+}
+
+.profile-inner i
+{
+    position: absolute;
+    top: 20px;
+    right: -7px;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: rgb(83, 123, 179);
+    cursor: pointer;
+    border: 2px solid var(--secondary);
+}
+
+.modal label
+{
+    color: black;
+    font-weight: bold;
+}
+
+.cancel
+{
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.modal .input-elem
+{
+    transition: none;
+    color: black;
+    margin: unset;
+}
+
+.modal textarea
+{
+    min-width: 100%;
+    resize: vertical;
+}
+
+.modal .input-elem::placeholder
+{
+    color: black;
+}
+.modal .input-div
+{
+    margin: unset;
+}
+.modal .label-margin
+{
+    margin-top: .3rem;
+}
+.inp{
+    width: 100%;
+}
+
+.modal p{
+    color: black;
+    font-weight: bold;
+}
+
+@keyframes fade-in 
+{
+    from{opacity: .4;}
+    to{opacity: 1;}
+}
+
+@keyframes slide-top
+{
+    0%{-webkit-transform:translateY(-100px);transform:translateY(-100px)}
+    100%{-webkit-transform:translateY(0);transform:translateY(0)}
+}
+

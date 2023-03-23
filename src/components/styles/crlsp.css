@@ -1,0 +1,168 @@
+.inp-ext
+{
+    color: black;
+    margin-top: 6px;
+}
+
+.crlsp-card textarea
+{
+    height: unset;
+}
+
+.crlsp-container
+{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #f3f3f3;
+}
+
+.crlsp-card
+{
+    max-width: 600px;
+    margin: 3rem;
+    padding: .9rem;
+    background-color: white;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.486);
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    white-space: normal;
+}
+
+.crlsp-card h3
+{
+    text-align: center;
+}
+
+.crlsp-card label
+{
+    font-weight: bold;
+    font-size: large;
+}
+
+.crlsp-card textarea
+{
+    min-width: 100%;
+    resize: vertical;
+}
+
+.crlsp-btn-ext
+{
+    border-radius: 5px;
+}
+
+.crlspc-search-btn
+{
+    margin-top: unset;
+}
+
+.choose-image-card
+{
+    max-width: 600px;
+    /* padding: .75rem; */
+}
+
+.choose-image-card input[type="search"]
+{
+    height: 2rem;
+    border-radius: 12pc;
+}
+
+.search-container 
+{
+    align-items: center;
+    display: flex;
+    justify-content: left;
+}
+
+form .no-submit 
+{
+/* width: 180px; */
+align-items: center;
+color: white;
+right: 0;
+display: flex;
+padding: 2px;
+border: 1px solid currentColor;
+border-radius: 5px;
+margin: 0 0;
+}
+
+input.no-submit 
+{
+border: 1px solid white;
+width: 100%;
+padding: 9px 4px 9px 4px;
+background-image: url("https://upload.wikimedia.org/wikipedia/commons/5/55/Magnifying_glass_icon.svg");
+background-size: 13px;
+background-repeat: no-repeat;
+background-position: 10px center;
+}
+
+input[type="search"] 
+{
+border: none;
+background-color: transparent;
+margin: 0;
+padding: 7px 8px 7px 30px;
+font-size: 16px;
+color: black;
+border: 1px solid black;
+border-radius: inherit;
+}
+
+input[type="search"]::placeholder 
+{
+color: rgb(0, 0, 0);
+}
+
+input[type="search"]:focus 
+{
+box-shadow: 0 0 3px 0 var(--secondary);
+border-color: var(--secondary);
+outline: none;
+}
+
+.choose-imgs
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+    grid-gap: 5px;
+    overflow-y: scroll;
+    max-height: 400px;
+    place-items: center;
+    min-height: 300px;
+}
+
+.choose-imgs::-webkit-scrollbar 
+{
+    width: 12px;
+}
+  
+  /* Track */
+.choose-imgs::-webkit-scrollbar-track 
+{
+    background: #f1f1f100; 
+}
+   
+  /* Handle */
+.choose-imgs::-webkit-scrollbar-thumb 
+{
+    background: var(--primary);
+    border-radius: 12pc;
+}
+  
+  /* Handle on hover */
+.choose-imgs::-webkit-scrollbar-thumb:hover 
+{
+    background: #555; 
+}
+
+.choose-image-card img
+{
+    width: 100%;
+    cursor: pointer;
+}
