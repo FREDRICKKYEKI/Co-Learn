@@ -38,17 +38,23 @@ body{
 
 .admin-mark
 {
-    width: 12px;
-    height: 12px;
+    width: max-content;
     background-color: var(--secondary);
-    border-radius: 50%;
+    border-radius: 5px;
+    color: var(--primary);
+    font-weight: bold;
     position: absolute;
     right: 1rem;
     top: 1rem;
+    font-size: small;
+    padding: .2rem;
+    border-bottom: 2px solid var(--primary);
 }
 
 .am-sm
 {
+    border-radius: 50%;
+    border: unset;
     right: .5rem;
     top: .5rem;
     width: 9px;
@@ -232,6 +238,11 @@ text-align: center;
     border-radius: 10px;
 }
 
+.posts-container
+{
+    max-width: 700px;
+}
+
 .ls-body h3
 {
     margin-block-start:.5rem;
@@ -285,8 +296,10 @@ text-align: center;
 {
     padding: .5rem;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 12px;
     position: relative;
+    border: 1px solid #ccc;
+    border-bottom: 3px #ccc solid;
 }
 .sticky{
     position: sticky;
@@ -388,17 +401,30 @@ text-align: center;
 
 @media only screen and (max-width:1200px) 
 {
+    .preq, .posts-container, .users
+    {
+        margin-inline: auto;
+        width: 95%;
+        justify-content: center;
+    }
     .ls-body
     {
         grid-template-columns: 1fr;
     }
+
     .preq, .users
     {
         position:relative
     }
+
     .container
     {
-        margin: 1rem;
+        margin: unset;
+    }
+
+    .posts-container
+    {
+        width: 95vw;
     }
 }
 
@@ -560,4 +586,108 @@ text-align: center;
 .rlspc-div
 {
     position: relative;
+}
+
+.post-post
+{   overflow: hidden;
+    margin  : .5rem;
+    padding: 1.3rem;
+    border-radius: 10px;
+    border: #e6e6e6 1px solid;
+    border-bottom: #ccc 3px solid;
+}
+
+.comment-footer
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+.vote
+{
+    background-color: #f3f3f3;
+    border-radius: 12pc;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding-inline: .4rem;
+    border-bottom: 3px solid #ccc;
+}
+
+.v-btn
+{
+    margin: .5rem;
+    width: max-content;
+    display: flex;
+    align-items: center;
+}
+
+.v-divide
+{
+    height: 40px;
+    width: 1px;
+    background-color: #d4d4d4;
+}
+.vote i, .comment i
+{
+  margin-right: 5px;
+  color: #888;
+}
+
+.count
+{
+  margin-right: 10px;
+}
+
+.vote i:hover, .comment i:hover
+{
+  cursor: pointer;
+  color: #000;
+}
+
+.arrow
+{
+    width: .9rem;
+    cursor: pointer;
+}
+
+.arrow:hover
+{
+    opacity: .8;
+}
+
+.comment
+{
+    display: flex;
+    align-items: center;
+}
+
+.option-cont
+{
+    position: relative;
+}
+
+.pop-up
+{
+    display: flex;
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    width: max-content;
+    border: 1px solid #a7a7a7;
+    background-color: white;
+    padding: .4rem;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.pop-up .fa-trash
+{
+    color:#000 !important;
+}
+
+.pop-up:hover
+{
+    background-color: #e0e0e0 !important;
 }

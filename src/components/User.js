@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 import { useAuth } from './Contexts/AuthProvider';
 import { useFirebase } from './Hooks/useFirebase'
@@ -8,9 +8,9 @@ export const User = ({ user, spaceData }) =>
   const { state } = useFirebase(null, user);
   const userData = state.user;
   const admin = spaceData.admin;
-  const isAdmin = admin == user;
+  const isAdmin = admin === user;
   const { currentUser } = useAuth()
-  const isCurrent = user == currentUser.uid;
+  const isCurrent = user === currentUser.uid;
   const defaultProfile = "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-68594.png?f=avif&w=256";
   return (
     <>  

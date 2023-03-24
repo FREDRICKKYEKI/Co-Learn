@@ -1,9 +1,7 @@
 import React from 'react'
-import { useAuth } from './Contexts/AuthProvider';
 import { User } from './User'
 
 export const Users = ({ spaceData }) => {
-  const { currentUser } = useAuth()
   const users = spaceData.users;
 
   return (

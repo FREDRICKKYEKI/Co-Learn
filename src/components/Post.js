@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import MDEditor from '@uiw/react-md-editor';
 import { useFirebase } from './Hooks/useFirebase';
 import moment from 'moment';
+import { CommentFooter } from './CommentFooter';
 
-export const Post = ({  post, isAdmin }) => 
+export const Post = ({  post, spaceData }) => 
 {
   const { state } = useFirebase(null, post.author);
   const [user, setUser] = useState();
   const [date, setDate] = useState()
- 
+  const admin = spaceData.admin;
+  const isAdmin = admin === state.user.id;
 
   useEffect(() => 
   {
@@ -29,7 +31,7 @@ export const Post = ({  post, isAdmin }) =>
       {state&&user&&(
         <>
           <div className="post-card">
-          {isAdmin&&<div className='admin-mark am-sm'></div>}
+          {isAdmin&&<div className='admin-mark '>admin</div>}
             <div className="post-prof-pic">
               <img src={user.url} alt="profile-picture" />
               <div className="post-user-details">
@@ -37,12 +39,13 @@ export const Post = ({  post, isAdmin }) =>
                 <div className="post-date">{date}</div>
               </div>
             </div>
-            <div className="pd">
+            <div className="pd post-post">
               <MDEditor.Markdown
                 source={post.postText}
                 style={{ whiteSpace: "pre-wrap"}}
               />
             </div>
+            <CommentFooter />
           </div>
         </>
       )}

@@ -7,7 +7,8 @@ import { uuidv4 } from '@firebase/util';
 import { useAuth } from './Contexts/AuthProvider';
 import { NoPosts } from './NoPosts';
 
-export const Posts = ({spaceData, posts, isAdmin}) => {
+
+export const Posts = ({spaceData, posts}) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Post something...");
   const [loading, setLoading] = useState(false);
@@ -77,7 +78,9 @@ export const Posts = ({spaceData, posts, isAdmin}) => {
         {posts.length > 0 ? (
           <>
             {posts.map((post) => (
-              <Post key={post.id} post={post} isAdmin={isAdmin}/>
+              <>
+                <Post key={post.id} post={post} spaceData={spaceData}/>
+              </>
             ))}
           </>
         ) : (

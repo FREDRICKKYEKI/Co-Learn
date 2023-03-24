@@ -124,11 +124,11 @@ export const LearningSpace = () =>
               >
                 {loading?<i className="fa fa-spinner fa-spin" style={{fontSize:"24px"}}></i>:<>{btnText}</>}
               </button>
-              {isAdmin && <div className="admin-mark"></div>}
+              {isAdmin && <div className="admin-mark">admin</div>}
             </header>
             <main className="ls-body">
               <Prerequisites spaceData={data} />
-              <Posts spaceData={data} posts={posts} isAdmin={isAdmin} />
+              <Posts spaceData={data} posts={posts} />
               <Users spaceData={data} />
             </main>
             <RelatedSpaces />
