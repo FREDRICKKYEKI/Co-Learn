@@ -10,7 +10,8 @@ const ACTIONS =
     SET_SPACE: "set_space",
     SET_LOADING: "set_loading",
     SET_USER: "set_user",
-    SET_POSTS: "SET_POSTS"
+    SET_POSTS: "set_posts",
+    SET_VOTES: "set_votes"
 }
  
 const initialState = 
@@ -19,6 +20,7 @@ const initialState =
     space:"",
     user:"",
     posts:"",
+    votes:"",
     loading: true
 }
 
@@ -51,17 +53,41 @@ const reducer = (state, {type, payload}) =>
                 ...state,
                 posts: payload.posts
             }
+        case ACTIONS.SET_VOTES:
+            return{
+                ...state,
+                votes: payload.votes
+            }
         default: return state;
     }
 }
 
-export const useFirebase = (spaceId = null, uid = null) => 
+export const useFirebase = (spaceId = null, uid = null, postId = null) => 
 {
     const [state, dispatch] = useReducer(reducer, initialState);
     const spacesRef = database.learningSpaces;
     const postsRef = database.posts;
     const usersRef = database.users;
+    const votesRef = database.votes;
     
+    useEffect(() => 
+    {
+        if(postId == null) return;
+        const q = query(votesRef, where("postId","==",postId));
+        
+        return onSnapshot(q, (querySnap) =>
+        {
+                const data = querySnap.docs.map(doc => database.formatDoc(doc));
+                dispatch({type: ACTIONS.SET_VOTES, payload: {votes: data}});
+                dispatch({type: ACTIONS.SET_LOADING, payload: {loading: false}});
+        },(e)=> 
+        {
+            console.log(e);
+            dispatch({type: ACTIONS.SET_LOADING, payload: {loading: false}})
+        })
+    }, [])
+    
+
     useEffect(() =>
     {
         if(spaceId == null) return;

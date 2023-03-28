@@ -3,7 +3,7 @@ import  {getAuth, GoogleAuthProvider, FacebookAuthProvider} from "firebase/auth"
 import 'firebase/compat/firestore'
 import { getStorage } from 'firebase/storage'
 import { getFirestore as getFirestorelite, doc } from 'firebase/firestore/lite';
-import { getFirestore, collection } from "firebase/firestore";
+import { getFirestore, collection, doc as dOc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDMnmAHLfCg14rP2Y2fWMJzPh5icGSX6UA",
@@ -28,8 +28,12 @@ export const database =
 { 
   user: (id) => doc(db, 'users', id),
   learningSpace: (id) => doc(db, 'learning_spaces', id),
+  vote: (id) => dOc(db2, 'votes', id),
+  post: (id) => dOc(db2, 'posts', id),
   formatDoc: doc => {return {id: doc.id, ...doc.data()}},
   learningSpaces: collection(db2, 'learning_spaces'),
   users: collection(db2, 'users'),
-  posts: collection(db2, 'posts')
+  posts: collection(db2, 'posts'),
+  votes: collection(db2, 'votes'),
+  comments: collection(db2, 'commemts')
 }

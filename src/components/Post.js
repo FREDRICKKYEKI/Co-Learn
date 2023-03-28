@@ -45,7 +45,7 @@ export const Post = ({  post, spaceData }) =>
                 style={{ whiteSpace: "pre-wrap"}}
               />
             </div>
-            <CommentFooter />
+            <CommentFooter post = {post}/>
           </div>
         </>
       )}
