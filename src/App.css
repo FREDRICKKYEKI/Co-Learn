@@ -34,7 +34,6 @@ body{
 .submitBtn, .saveBtn
 {
   height: 2.5rem;
-  padding: 4px 8px;
   font-size: medium;
   opacity: .9;
   border-bottom: 3px solid var(--secondary);

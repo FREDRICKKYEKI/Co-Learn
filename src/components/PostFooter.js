@@ -5,7 +5,7 @@ import { database } from '../firebase';
 import { useAuth } from './Contexts/AuthProvider';
 import { useFirebase } from './Hooks/useFirebase';
 
-export const CommentFooter = ({ post }) => 
+export const PostFooter = ({ post, setOpenComments, OpenComments, comments }) => 
 {
     const [postVotes, setPostVotes] = useState({Upvotes:0, Downvotes:0});
     const [open, setOpen] = useState(false);
@@ -140,24 +140,22 @@ export const CommentFooter = ({ post }) =>
         <button onClick={() => vote("d")} className="v-btn">
           <i
             title="Down-Vote"
-            // style={{ color: `${downVote ? "var(--secondary)" : ""}` }}
             className={`fal fa-lg fa-down icon ${downVote && "voted"} `}
           ></i>
         </button>
       </div>
-      <div className="comment">
-        <span className="v-btn">
+      <div className="footer-comment">
+        <span onClick={() => setOpenComments(!OpenComments)} className="v-btn">
           <i className="far fa-lg fa-comment-dots icon"></i>
           <span style={{ fontSize: "14px" }} className="count">
-            5
+            {comments?comments.length:"0"}
           </span>
         </span>
         <span
           onClick={(e) => {
             setOpen(!open);
           }}
-          className="option-cont"
-        >
+          className="option-cont">
           <i className="fa-solid fa-lg fa-ellipsis icon"></i>
           {open && (
             <span className="pop-up">

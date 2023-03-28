@@ -2,20 +2,26 @@ import React, { useEffect, useState } from 'react'
 import MDEditor from '@uiw/react-md-editor';
 import { useFirebase } from './Hooks/useFirebase';
 import moment from 'moment';
-import { CommentFooter } from './CommentFooter';
+import { PostFooter } from './PostFooter';
+import { CommentSection } from './CommentSection';
+import { PostProfile } from './PostProfile';
+import { AdminMark } from './AdminMark';
 
 export const Post = ({  post, spaceData }) => 
 {
-  const { state } = useFirebase(null, post.author);
+  const { state } = useFirebase(null, post.author, post.id);
   const [user, setUser] = useState();
   const [date, setDate] = useState()
   const admin = spaceData.admin;
   const isAdmin = admin === state.user.id;
+  const [openComments, setOpenComments] = useState(false)
+  const comments = state.comments;
 
+  
   useEffect(() => 
   {
-   setUser(state.user);
-
+    setUser(state.user);
+    
   }, [state.user])
 
   useEffect(()=>
@@ -25,27 +31,26 @@ export const Post = ({  post, spaceData }) =>
 
   },[post.timestamp])
 
-
   return (
     <>
-      {state&&user&&(
+      {state && user && (
         <>
-          <div className="post-card">
-          {isAdmin&&<div className='admin-mark '>admin</div>}
-            <div className="post-prof-pic">
-              <img src={user.url} alt="profile-picture" />
-              <div className="post-user-details">
-                <h5>{user.names.firstName + " " + user.names.secondName}</h5>
-                <div className="post-date">{date}</div>
-              </div>
-            </div>
+          <div key={post.id} className="post-card">
+            <AdminMark isAdmin={isAdmin} />
+            <PostProfile user={user} date={date} />
             <div className="pd post-post">
               <MDEditor.Markdown
                 source={post.postText}
-                style={{ whiteSpace: "pre-wrap"}}
+                style={{ whiteSpace: "pre-wrap" }}
               />
             </div>
-            <CommentFooter post = {post}/>
+            <PostFooter
+              post={post}
+              setOpenComments={setOpenComments}
+              OpenComments={openComments}
+              comments={comments}
+            />
+            {openComments && <CommentSection postAuthor={user} postData={post} comments={comments}/>}
           </div>
         </>
       )}

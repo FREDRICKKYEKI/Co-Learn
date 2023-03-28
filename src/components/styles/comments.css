@@ -1,0 +1,44 @@
+.com-header
+{
+    justify-content: space-around;
+}
+
+.com-h
+{
+    width: 100%;
+    text-align: center;
+    padding: .5rem;
+    transition: all .3s;
+}
+
+.com-h:nth-child(2) /**ADD COMMENT*/
+{
+    cursor: pointer;
+    color: var(--primary);
+}
+
+.com-h:nth-child(2):hover
+{
+    color: black;
+}
+
+.comments-div
+{
+    border-top: 3px #ccc solid;
+    border-radius: 12px 12px 0 0;
+    padding: .5rem;
+    height: 400px;
+    overflow-y: scroll;
+}
+
+.comments-div .comment
+{
+    margin-top: .3rem;
+    border:#ccc 1px solid;
+    border-radius: 5px;
+}
+
+.no-comments
+{
+    height: max-content;
+}

@@ -11,7 +11,8 @@ const ACTIONS =
     SET_LOADING: "set_loading",
     SET_USER: "set_user",
     SET_POSTS: "set_posts",
-    SET_VOTES: "set_votes"
+    SET_VOTES: "set_votes",
+    SET_COMMENTS: "set_comments"
 }
  
 const initialState = 
@@ -21,7 +22,8 @@ const initialState =
     user:"",
     posts:"",
     votes:"",
-    loading: true
+    loading: true,
+    comments:""
 }
 
 const reducer = (state, {type, payload}) => 
@@ -58,6 +60,11 @@ const reducer = (state, {type, payload}) =>
                 ...state,
                 votes: payload.votes
             }
+        case ACTIONS.SET_COMMENTS:
+            return{
+                ...state,
+                comments: payload.comments
+            }
         default: return state;
     }
 }
@@ -69,7 +76,28 @@ export const useFirebase = (spaceId = null, uid = null, postId = null) =>
     const postsRef = database.posts;
     const usersRef = database.users;
     const votesRef = database.votes;
-    
+    const commentsRef = database.comments;
+
+    //get comments by post id
+    useEffect(() =>
+    {
+        if (postId == null) return;
+        const q = query(commentsRef, where("postId", "==", postId), orderBy("timestamp","desc"));
+
+        return onSnapshot(q, (querySnap) =>
+        {
+                const data = querySnap.docs.map(doc => database.formatDoc(doc));
+
+                dispatch({type: ACTIONS.SET_COMMENTS, payload: {comments: data}});
+                dispatch({type: ACTIONS.SET_LOADING, payload: {loading: false}});
+        },(e)=> 
+        {
+            console.log(e)
+            dispatch({type: ACTIONS.SET_LOADING, payload: {loading: false}})
+        })
+    },[])
+
+    //get votes by post id
     useEffect(() => 
     {
         if(postId == null) return;
@@ -87,7 +115,7 @@ export const useFirebase = (spaceId = null, uid = null, postId = null) =>
         })
     }, [])
     
-
+    //get posts by learning space id
     useEffect(() =>
     {
         if(spaceId == null) return;
@@ -103,7 +131,7 @@ export const useFirebase = (spaceId = null, uid = null, postId = null) =>
 
         },[])
 
-
+    //get user by uid
     useEffect(() =>
     {
         if(uid == null) return;
@@ -124,7 +152,7 @@ export const useFirebase = (spaceId = null, uid = null, postId = null) =>
         });    
     }, [])
     
-
+    //get all learning spaces
     useEffect(() =>
     {
         return onSnapshot(spacesRef, (querySnap) => 
@@ -138,6 +166,7 @@ export const useFirebase = (spaceId = null, uid = null, postId = null) =>
         () => dispatch({type: ACTIONS.SET_LOADING, payload:{loading: false}}))
     },[])
 
+    //get learning space by space id
     useEffect(() =>
     {
         if(spaceId == null) return;

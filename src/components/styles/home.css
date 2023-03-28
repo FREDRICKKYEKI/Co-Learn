@@ -260,18 +260,18 @@ text-align: center;
     border-radius: 5px;
 }
 
-.posts::-webkit-scrollbar
+.posts::-webkit-scrollbar, .comments-div::-webkit-scrollbar
 {
     width: 12px;
 }
 
-.posts::-webkit-scrollbar-thumb
+.posts::-webkit-scrollbar-thumb, .comments-div::-webkit-scrollbar-thumb
 {
     background-color: #b1b1b1;
     border-radius: 12pc;
 }
 
-.posts::-webkit-scrollbar-thumb:hover
+.posts::-webkit-scrollbar-thumb:hover, .comments-div::-webkit-scrollbar-thumb:hover
 {
     background-color: #858585;
 }
@@ -292,7 +292,7 @@ text-align: center;
     border: 2px solid var(--secondary);
     margin-right: .7rem;
 }
-.post-card
+.post-card, .comments-div .comment
 {
     padding: .5rem;
     background-color: white;
@@ -658,7 +658,7 @@ text-align: center;
     opacity: .8;
 }
 
-.comment
+.footer-comment
 {
     display: flex;
     align-items: center;

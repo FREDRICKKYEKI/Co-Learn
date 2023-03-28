@@ -6,6 +6,7 @@ import { db2 } from '../firebase';
 import { uuidv4 } from '@firebase/util';
 import { useAuth } from './Contexts/AuthProvider';
 import { NoPosts } from './NoPosts';
+import { CreatePostBtn } from './CreatePostBtn';
 
 
 export const Posts = ({spaceData, posts}) => {
@@ -99,27 +100,7 @@ export const Posts = ({spaceData, posts}) => {
           </div>
         )}
         <div className="d-flex j-c pd">
-          <button
-            disabled={loading}
-            type={`${open && "submit"}`}
-            className={`create-post-btn ${open && "bg"}`}
-          >
-            {open ? (
-              <>
-                <i className="fa fa-plus-circle mr-2" />
-                {loading ? (
-                  <i
-                    className="fa fa-spinner fa-spin"
-                    style={{ fontSize: "24px" }}
-                  ></i>
-                ) : (
-                  <>Post</>
-                )}
-              </>
-            ) : (
-              "+ Create Post"
-            )}
-          </button>
+        <CreatePostBtn open={open} loading={loading}/>
           {open && (
             <div onClick={() => setOpen(false)}>
               <i className="fa fa-angle-up fa-lg paperclip" />

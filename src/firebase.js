@@ -30,10 +30,11 @@ export const database =
   learningSpace: (id) => doc(db, 'learning_spaces', id),
   vote: (id) => dOc(db2, 'votes', id),
   post: (id) => dOc(db2, 'posts', id),
+  comment: (id) => dOc(db2, 'comments', id),
   formatDoc: doc => {return {id: doc.id, ...doc.data()}},
   learningSpaces: collection(db2, 'learning_spaces'),
   users: collection(db2, 'users'),
   posts: collection(db2, 'posts'),
   votes: collection(db2, 'votes'),
-  comments: collection(db2, 'commemts')
+  comments: collection(db2, 'comments')
 }
