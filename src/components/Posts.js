@@ -16,7 +16,8 @@ export const Posts = ({spaceData, posts}) => {
   const { currentUser } = useAuth();
   const postRef = useRef();
   const spaceId = spaceData.id;
-
+  const spaceMembers = spaceData.users;
+  const isMember = spaceMembers&&spaceMembers.includes(currentUser.uid);
 
   const handleSubmitForm = async (e) => 
   {
@@ -24,6 +25,11 @@ export const Posts = ({spaceData, posts}) => {
     if(!currentUser)
     {
       alert("Oops😥, you are not Signed In. Please sign in to be able to contribute in the learning space.");
+      return;
+    }
+    else if (!isMember)
+    {
+      alert("Oops😥, you are not joined. Please join the learning spaceto be able to contribute.");
       return;
     }
     else

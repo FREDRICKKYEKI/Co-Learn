@@ -2,17 +2,15 @@ import React, {useEffect} from 'react'
 import ReactDOM  from 'react-dom'
 import './styles/modal.css'
 
-export const Modal = ({open, setOpen,children}) => 
+export const Modal = ({open, setOpen, children}) => 
 {
   useEffect(() => 
   {
     if(open)
-      document.body.style = "overflow: hidden"
-  
-    return () => 
-    {
-      document.body.style = "overflow: scroll"
-    }
+    document.body.classList.toggle("overflow-h");
+    else
+    document.body.classList.toggle("overflow-h");
+
   }, [open])
   
   const closeModal = (e) =>

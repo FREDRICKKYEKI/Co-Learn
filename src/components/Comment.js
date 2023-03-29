@@ -7,19 +7,11 @@ import moment from 'moment';
 export const Comment = ({ commentData }) =>
 {
   const { state } = useFirebase(null, commentData.commentAuthor, null);
-  const [date, setDate] = useState();
-
-  useEffect(()=>
-  {
-    if(commentData.timestamp)
-      setDate(moment(commentData.timestamp.toDate()).format("MMMM Do YYYY, h:mm:ss"));
-
-  },[commentData.timestamp])
 
   return (
 
     <div className="comment">
-      <PostProfile user={state.user} date={date} />
+      <PostProfile user={state.user} timestamp={commentData.timestamp} />
       <div className='post-post'>
         <MDEditor.Markdown
           source={commentData.comment}

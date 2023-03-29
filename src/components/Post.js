@@ -11,25 +11,13 @@ export const Post = ({  post, spaceData }) =>
 {
   const { state } = useFirebase(null, post.author, post.id);
   const [user, setUser] = useState();
-  const [date, setDate] = useState()
   const admin = spaceData.admin;
   const isAdmin = admin === state.user.id;
   const [openComments, setOpenComments] = useState(false)
   const comments = state.comments;
 
   
-  useEffect(() => 
-  {
-    setUser(state.user);
-    
-  }, [state.user])
-
-  useEffect(()=>
-  {
-    if(post.timestamp)
-      setDate(moment(post.timestamp.toDate()).format("MMMM Do YYYY, h:mm:ss"));
-
-  },[post.timestamp])
+  useEffect(() => { setUser(state.user); }, [state.user])
 
   return (
     <>
@@ -37,7 +25,7 @@ export const Post = ({  post, spaceData }) =>
         <>
           <div key={post.id} className="post-card">
             <AdminMark isAdmin={isAdmin} />
-            <PostProfile user={user} date={date} />
+            <PostProfile user={user} timestamp={post.timestamp} />
             <div className="pd post-post">
               <MDEditor.Markdown
                 source={post.postText}
@@ -50,7 +38,13 @@ export const Post = ({  post, spaceData }) =>
               OpenComments={openComments}
               comments={comments}
             />
-            {openComments && <CommentSection postAuthor={user} postData={post} comments={comments}/>}
+            {openComments && (
+              <CommentSection
+                postAuthor={user}
+                postData={post}
+                comments={comments}
+              />
+            )}
           </div>
         </>
       )}

@@ -115,11 +115,11 @@ export const LogIn = () =>
             </div>
             <div id="socials-container">
                 <span title='Log in with Google' onClick={()=>logInGoogle()}>
-                    <i className="fa fa-google"></i>
+                    <i className="fa-brands fa-google"></i>
                     <div className='flare'></div>
                 </span>
                 <span title='Log in with Facebook/Meta' onClick={()=>logInFacebook()}>
-                    <i className="fa fa-facebook"></i>
+                    <i className="fa-brands fa-facebook-f"></i>
                     <div className='flare'></div>
                 </span>            
             </div>

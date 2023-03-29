@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, createContext, useContext } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from './Contexts/AuthProvider'
 import { useFirebase } from './Hooks/useFirebase'
@@ -7,12 +7,14 @@ import { Prerequisites } from './Prerequisites'
 import { RelatedSpaces } from './RelatedSpaces'
 import './styles/home.css'
 import { Users } from './Users'
-import { uuidv4 } from '@firebase/util';
-import { database, db, db2 } from '../firebase'
-import { doc, getDoc, updateDoc } from 'firebase/firestore'
+import { db2 } from '../firebase'
+import { doc, updateDoc } from 'firebase/firestore'
 import { Link } from 'react-router-dom'
 import { LoadingScreen } from './LoadingScreen'
 
+export const UserContext = createContext();
+
+export function useCurrentDBUser() { return useContext(UserContext) }
 
 export const LearningSpace = () =>
 {
@@ -21,14 +23,14 @@ export const LearningSpace = () =>
     const { currentUser } = useAuth();
     const [joined, setJoined] = useState();
     const [loading, setLoading] = useState()
-    const { state } = useFirebase(spaceId, null);
-    const data = state.space;
+    const { state } = useFirebase(spaceId, currentUser.uid, null);
+    const spaceData = state.space;
     const posts = state.posts;
     var btnText = currentUser?joined?"Leave":"Join":"Sign up join";
-    const isAdmin = currentUser?data.admin == currentUser.uid:false;
-    const members = data.members;
-    var users = data.users;
-    
+    const isAdmin = currentUser?spaceData.admin == currentUser.uid:false;
+    const members = spaceData.members;
+    var users = spaceData.users;
+    const user = state.user;
 
     const joinSpace = (e) => 
     {
@@ -58,7 +60,7 @@ export const LearningSpace = () =>
             const newUsers = users.filter(user => user != currentUser.uid);
             const newMembers = newUsers.length;
             
-            updateDoc(doc(db2, "learning_spaces", data.id),
+            updateDoc(doc(db2, "learning_spaces", spaceData.id),
             {
                 members: newMembers,
                 users: newUsers
@@ -74,7 +76,7 @@ export const LearningSpace = () =>
         else
         {
             users.push(currentUser.uid);
-            updateDoc(doc(db2, "learning_spaces", data.id),
+            updateDoc(doc(db2, "learning_spaces", spaceData.id),
             {
                 members: users.length,
                 users: users
@@ -92,48 +94,62 @@ export const LearningSpace = () =>
 
     useEffect(() => 
     {
-        if(!currentUser) return;
-        if(isAdmin)
-            setJoined(true)
-        else
-        {
-            if(data&&data.users.includes(currentUser.uid)) setJoined(true);
-            else setJoined(false);
-        }
-    }, [data])
+      if(!currentUser) return;
+      if(isAdmin)
+        setJoined(true)
+      else
+      {
+        if(spaceData&&spaceData.users.includes(currentUser.uid)) setJoined(true);
+        else setJoined(false);
+      }
+    }, [spaceData])
 
     return (
-      <>
-        {data && state.loading ? (
+    <>{state.user&&
+      <UserContext.Provider value={{user:state.user}}>
+        {spaceData && state.loading ? (
           <LoadingScreen />
         ) : (
           <div className="container">
-            <header className="heading">
-              <Link className="back-btn" to="/">
-                <i className="fa fa-arrow-circle-left fa-2x " />
-              </Link>
-              <h1>{data.title}</h1>
-              <button
-                disabled={isAdmin}
-                style={{
-                  backgroundColor: joined && "var(--secondary)",
-                  color: joined && "white",
-                }}
-                onClick={(e) => joinSpace(e)}
-                className="join-leave-btn"
-              >
-                {loading?<i className="fa fa-spinner fa-spin" style={{fontSize:"24px"}}></i>:<>{btnText}</>}
-              </button>
-              {isAdmin && <div className="admin-mark">admin</div>}
+            <header
+              style={{ backgroundImage: `url(${spaceData.url})` }}
+              className="heading"
+            >
+              <div className='header-bg'>
+                <Link className="back-btn" to="/">
+                  <i className="fa fa-arrow-circle-left fa-2x " />
+                </Link>
+                <h1>{spaceData.title}</h1>
+                <button
+                  disabled={isAdmin}
+                  style={{
+                    backgroundColor: joined && "var(--secondary)",
+                    color: joined && "white",
+                  }}
+                  onClick={(e) => joinSpace(e)}
+                  className="join-leave-btn"
+                >
+                  {loading ? (
+                    <i
+                      className="fa fa-spinner fa-spin"
+                      style={{ fontSize: "24px" }}
+                    ></i>
+                  ) : (
+                    <>{btnText}</>
+                  )}
+                </button>
+                {isAdmin && <div className="admin-mark">admin</div>}
+              </div>
             </header>
             <main className="ls-body">
-              <Prerequisites spaceData={data} />
-              <Posts spaceData={data} posts={posts} />
-              <Users spaceData={data} />
+              <Prerequisites spaceData={spaceData} />
+              <Posts spaceData={spaceData} posts={posts} />
+              <Users spaceData={spaceData} />
             </main>
             <RelatedSpaces />
           </div>
         )}
-      </>
+      </UserContext.Provider>
+    }</>
     );
 }

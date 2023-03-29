@@ -1,6 +1,8 @@
 .com-header
 {
     justify-content: space-around;
+    background-color: #ffffff00;
+    backdrop-filter: blur(30px);
 }
 
 .com-h
@@ -19,7 +21,7 @@
 
 .com-h:nth-child(2):hover
 {
-    color: black;
+    color: var(--secondary);
 }
 
 .comments-div
@@ -27,18 +29,34 @@
     border-top: 3px #ccc solid;
     border-radius: 12px 12px 0 0;
     padding: .5rem;
+    overflow-y: hidden;
     height: 400px;
-    overflow-y: scroll;
 }
 
+.comms-area
+{
+    height: 300px;
+    overflow-y: scroll;
+}
 .comments-div .comment
 {
-    margin-top: .3rem;
+    margin: .8rem;
     border:#ccc 1px solid;
     border-radius: 5px;
 }
 
 .no-comments
 {
-    height: max-content;
+    height: max-content !important;
+}
+
+.post-snapshot
+{
+    overflow: hidden;
+    max-height: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 1rem;
+    width: 100%;
 }

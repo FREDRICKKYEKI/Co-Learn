@@ -35,7 +35,11 @@ body{
     height: max-content;
     position: relative;
 }
-
+.header-bg
+{
+    width: 100%;
+    background-image: linear-gradient(to right, #0e294791, rgba(0, 0, 0, 0.486));
+}
 .admin-mark
 {
     width: max-content;
@@ -260,18 +264,23 @@ text-align: center;
     border-radius: 5px;
 }
 
-.posts::-webkit-scrollbar, .comments-div::-webkit-scrollbar
+.posts::-webkit-scrollbar, .comms-area::-webkit-scrollbar
 {
     width: 12px;
 }
 
-.posts::-webkit-scrollbar-thumb, .comments-div::-webkit-scrollbar-thumb
+.comms-area::-webkit-scrollbar
+{
+    width: 8px;
+}
+
+.posts::-webkit-scrollbar-thumb, .comms-area::-webkit-scrollbar-thumb
 {
     background-color: #b1b1b1;
     border-radius: 12pc;
 }
 
-.posts::-webkit-scrollbar-thumb:hover, .comments-div::-webkit-scrollbar-thumb:hover
+.posts::-webkit-scrollbar-thumb:hover, .comms-area::-webkit-scrollbar-thumb:hover
 {
     background-color: #858585;
 }

@@ -6,7 +6,7 @@
     height: 100%;
     z-index:2;
     top:0;
-    background-color: rgba(0, 25, 78, 0.507);
+    background-color: rgba(0, 0, 0, 0.507);
     display: grid;
     place-items: center;
     animation: fade-in 1 .3s;   

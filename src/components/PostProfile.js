@@ -1,6 +1,17 @@
-import React from 'react'
+import moment from 'moment';
+import React, { useEffect, useState } from 'react'
 
-export const PostProfile = ({ user, date }) => {
+export const PostProfile = ({ user, timestamp }) =>
+{
+  const [date, setDate] = useState();
+
+  useEffect(()=>
+  {
+    if(timestamp)
+      setDate(moment(timestamp.toDate()).format("MMMM Do YYYY, h:mm:ss"));
+    else setDate("")
+  },[timestamp])
+
   return (
     <>
       {user && (

@@ -3,7 +3,8 @@
   --background:#154b97bb;
 }
 
-body{
+body
+{
   background-color: #f3f3f3;
 }
 .logo 
@@ -107,8 +108,13 @@ body{
 button:disabled
 {
   -webkit-filter: grayscale(100%);
+  opacity: .8;
+  cursor: not-allowed;
 }
-
+button:disabled:hover
+{
+  opacity: .8 !important;
+}
 .lgout-btn-div
 {
   width: 100%;
@@ -216,4 +222,12 @@ button:disabled
 .m
 {
   margin: .5rem;
+}
+.w-100
+{
+  width: 100%;
+}
+.overflow-h
+{
+  overflow: hidden !important;
 }

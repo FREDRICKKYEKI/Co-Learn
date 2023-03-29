@@ -153,11 +153,11 @@ export const SignUp = () => {
             </div>
             <div id="socials-container">
                 <span title='Sign Up with Google' onClick={()=>handleGoogleSignUp()}>
-                    <i className="fa fa-google"></i>
+                    <i className="fa-brands fa-google"></i>
                     <div className='flare'></div>
                 </span>
                 <span title='Sign Up with Facebook/Meta' onClick={()=>handleFacebookSignUp()}>
-                    <i className="fa fa-facebook"></i>
+                    <i className="fa-brands fa-facebook-f"></i>
                     <div className='flare'></div>
                 </span>            
             </div>
