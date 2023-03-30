@@ -11,7 +11,7 @@ export const User = ({ user, spaceData }) =>
   const admin = spaceData.admin;
   const isAdmin = admin === user;
   const { currentUser } = useAuth()
-  const isCurrent = user === currentUser.uid;
+  const isCurrent = currentUser ? user === currentUser.uid : false;
   const defaultProfile = "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-68594.png?f=avif&w=256";
   return (
     <>

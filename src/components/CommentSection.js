@@ -1,12 +1,24 @@
 import React, { useState } from 'react'
 import { AddCommentModal } from './AddCommentModal';
 import { Comment } from './Comment'
-import { useFirebase } from './Hooks/useFirebase';
+import { useAuth } from './Contexts/AuthProvider';
 import './styles/comments.css'
 
 export const CommentSection = ({ postData, comments, postAuthor }) =>
 {
-    const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const { currentUser } = useAuth()
+
+  const openAddCommentsModal = () =>
+  {
+    if (!currentUser)
+    {
+      alert("Oops😥, you are not Signed In. Please sign in to be able to contribute in the learning space.");
+      return;
+    }
+    else
+      setOpen(!open)
+  }
 
   return (
     <div className={`comments-div ${comments < 1 && "no-comments"}`}>
@@ -15,7 +27,7 @@ export const CommentSection = ({ postData, comments, postAuthor }) =>
           <strong>Comments({comments.length})</strong>
         </div>
         <div
-          onClick={() => setOpen(!open)}
+          onClick={() => openAddCommentsModal()}
           title="Add comment"
           className="add-comment com-h"
         >

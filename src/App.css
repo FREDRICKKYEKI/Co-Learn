@@ -231,3 +231,8 @@ button:disabled:hover
 {
   overflow: hidden !important;
 }
+
+.highlight
+{
+  background-color: yellow;
+}

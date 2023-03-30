@@ -1,4 +1,4 @@
-.overlay
+.overlay, .side-modal-overlay
 {
     padding: 3rem;
     position: fixed;
@@ -14,7 +14,7 @@
     overflow-y: scroll;
 }
 
-.modal
+.modal, .side-modal
 {
     transition: all .2s;
     background: white;
@@ -113,3 +113,59 @@
     100%{-webkit-transform:translateY(0);transform:translateY(0)}
 }
 
+.side-modal-overlay
+{
+    display: flex;
+    justify-content: end;
+    padding: unset;
+    background-color: rgba(0, 0, 0, 0.158);
+}
+
+.side-modal-overlay .highlights
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.side-modal
+{
+    overflow: scroll;
+    width: 0px;
+    height: 100%;
+    padding: 0px;
+    border-radius: unset;
+    animation: slide-left 0.2s ease-out both;
+}
+
+.side-modal::-webkit-scrollbar
+{
+    width: 10px;
+}
+
+.side-modal::-webkit-scrollbar-thumb
+{
+    border-radius: 12pc;
+    background-color: #b6b6b6;
+}
+
+.side-modal::-webkit-scrollbar-thumb:hover
+{
+    background-color: #979797;
+}
+
+@keyframes slide-left {
+    from{
+        width: 0;
+    }
+    to{
+        max-width: 380px;
+    }
+}
+
+.open-modal
+{
+    padding: 17px;
+    width: 320px;
+}

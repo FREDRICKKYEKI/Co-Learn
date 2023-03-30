@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react'
+import React, { useState, useEffect} from 'react'
 import { SignUp } from './components/AuthComponents/SignUp';
 import {BrowserRouter as Router, Routes, Route, useLocation} from 'react-router-dom'
 import { LogIn } from './components/AuthComponents/LogIn';
@@ -13,12 +13,14 @@ import { LoadingScreen } from './components/LoadingScreen';
 import { CreateLearningSpace } from './components/CreateLearningSpace';
 import { DragDropFile } from './components/DragDropFile';
 import { UserProfile } from './components/AuthComponents/UserProfile';
+import { SideModal } from './components/SideModal';
 
 const LazyProfile = React.lazy(() => import('./components/AuthComponents/Profile')) 
 
 function App() {
   const excludedRoutes = ['/login', '/signup']
-  const location = useLocation()
+  const location = useLocation();
+
   return (
     <>
       {!excludedRoutes.includes(location.pathname) && <NavBar />}
@@ -42,7 +44,6 @@ function App() {
           <Route path="/createlearningspace" element={<RequireAuth><CreateLearningSpace/></RequireAuth>} />
         </Routes>
       </AuthProvider>
-      {/* <DragDropFile/> */}
     </>
   );
 }

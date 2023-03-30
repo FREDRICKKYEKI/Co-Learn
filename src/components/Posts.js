@@ -7,9 +7,17 @@ import { uuidv4 } from '@firebase/util';
 import { useAuth } from './Contexts/AuthProvider';
 import { NoPosts } from './NoPosts';
 import { CreatePostBtn } from './CreatePostBtn';
+import HighlightPop from 'react-highlight-pop';
+import "rangy/lib/rangy-classapplier";
+import "rangy/lib/rangy-highlighter";
+import "rangy/lib/rangy-serializer";
+import rangy from "rangy";
+import { useSpaceContext } from './LearningSpace';
 
-
-export const Posts = ({spaceData, posts}) => {
+export const Posts = ({spaceData, posts}) =>
+{
+  rangy.init();
+  const { openSideModal, setOpenModal, highlights, setHighlights } = useSpaceContext();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Post something...");
   const [loading, setLoading] = useState(false);
@@ -17,7 +25,9 @@ export const Posts = ({spaceData, posts}) => {
   const postRef = useRef();
   const spaceId = spaceData.id;
   const spaceMembers = spaceData.users;
-  const isMember = spaceMembers&&spaceMembers.includes(currentUser.uid);
+  const isMember = currentUser?spaceMembers&&spaceMembers.includes(currentUser.uid):false;
+  const [styles, setStyles] = useState({ color: "white" });
+  var highlightsArr = [];
 
   const handleSubmitForm = async (e) => 
   {
@@ -77,22 +87,68 @@ export const Posts = ({spaceData, posts}) => {
       }
     }
   }
+  const onHighlightAction = () =>
+  {
+    const highlighter = rangy.createHighlighter();
+    const id = uuidv4();
+    const classApplier = rangy.createClassApplier("highlight", {
+      tagNames: ["span"],
+      elementAttributes: { id: id },
+      onElementCreate: (element) => {
+        element.addEventListener("click", onHighlightClick);
+      }
+    });
+    highlighter.addClassApplier(classApplier);
+    highlighter.highlightSelection("highlight");
+    var selTxt = rangy.getSelection().toString();
+    let selection = rangy.getSelection();
+    let range = selection.getRangeAt(0);
+    rangy.getSelection().removeAllRanges();
+
+    const highlightData = {
+      id: id,
+      text: selTxt.toString(),
+      annot: ""
+    };
+    highlightsArr = highlights;
+    highlightsArr.push(highlightData);
+    setHighlights(highlightsArr);
+
+  }
+ 
+  const onHighlightClick = (event) =>
+  {
+    event.preventDefault();
+    setOpenModal(true);
+    
+  };
 
   return (
     <div className="posts-container">
       <h3>Posts({posts.length})</h3>
       <div ref={postRef} className="posts">
-        {posts.length > 0 ? (
-          <>
-            {posts.map((post) => (
-              <>
-                <Post key={post.id} post={post} spaceData={spaceData}/>
-              </>
-            ))}
-          </>
-        ) : (
-          <NoPosts />
-        )}
+        <HighlightPop
+          popoverItems={(itemClass) => (
+            <>
+              <span className={itemClass} onClick={() => onHighlightAction()}>
+                <i style={styles} className="fa fa-highlighter"></i>
+              </span>
+            </>
+          )}
+          onHighlightPop={() => setStyles({ color: "white" })}
+        >
+          {posts.length > 0 ? (
+            <>
+              {posts.map((post) => (
+                <>
+                  <Post key={post.id} post={post} spaceData={spaceData} />
+                </>
+              ))}
+            </>
+          ) : (
+            <NoPosts />
+          )}
+        </HighlightPop>
       </div>
       <form className="post-div" onSubmit={(e) => handleSubmitForm(e)}>
         {open && (
@@ -106,7 +162,7 @@ export const Posts = ({spaceData, posts}) => {
           </div>
         )}
         <div className="d-flex j-c pd">
-        <CreatePostBtn open={open} loading={loading}/>
+          <CreatePostBtn open={open} loading={loading} />
           {open && (
             <div onClick={() => setOpen(false)}>
               <i className="fa fa-angle-up fa-lg paperclip" />

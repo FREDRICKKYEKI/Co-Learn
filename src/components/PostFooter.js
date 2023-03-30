@@ -19,6 +19,7 @@ export const PostFooter = ({ post, setOpenComments, OpenComments, comments }) =>
     const getUserVote = () =>
     {
         if(!votes) return;
+        if(!currentUser) return null;
         votes.forEach(obj => 
             {
                 map.set(obj.userId, obj)
@@ -55,66 +56,70 @@ export const PostFooter = ({ post, setOpenComments, OpenComments, comments }) =>
 
     const vote = async (v) =>
     {
-        const vote = getUserVote();
-        const newId = uuidv4();
-        switch (v)
-        {
-            case upvote:
-                if(vote)
+      if (!currentUser)
+      {
+        alert("Oops😥, you are not joined. Please join the learning spaceto be able to contribute.");
+      }
+      const vote = getUserVote();
+      const newId = uuidv4();
+      switch (v)
+      {
+        case upvote:
+            if(vote)
+            {
+                if(vote.value == upvote)
                 {
-                    if(vote.value == upvote)
+                    await deleteDoc(database.vote(vote.id)).then(()=>
                     {
-                        await deleteDoc(database.vote(vote.id)).then(()=>
-                        {
-                           console.log("unvoted");
-                        });
-                    }
-                    else if(vote.value == downvote) 
-                    {
-                        updateDoc(database.vote(vote.id), { value: upvote }).then(() =>console.log("upvoted")).catch(() =>console.log("error"))
-                    }
+                        console.log("unvoted");
+                    });
                 }
-                else
+                else if(vote.value == downvote) 
                 {
-                    await setDoc(database.vote(newId),
-                    {
-                        id: newId,
-                        userId: currentUser.uid,
-                        postId: post.id,
-                        value: upvote
+                    updateDoc(database.vote(vote.id), { value: upvote }).then(() =>console.log("upvoted")).catch(() =>console.log("error"))
+                }
+            }
+            else
+            {
+                await setDoc(database.vote(newId),
+                {
+                    id: newId,
+                    userId: currentUser.uid,
+                    postId: post.id,
+                    value: upvote
 
-                    },{ merge: true }).catch((e) => console.log(e))
-                }
-            break;
-            case downvote:
-                if(vote)
+                },{ merge: true }).catch((e) => console.log(e))
+            }
+        break;
+        case downvote:
+            if(vote)
+            {
+                if(vote.value == downvote)
                 {
-                    if(vote.value == downvote)
+                    await deleteDoc(database.vote(vote.id)).then(()=>
                     {
-                        await deleteDoc(database.vote(vote.id)).then(()=>
-                        {
-                           console.log("unvoted");
-                        })
-                    }
-                    else if (vote.value == upvote)
-                    {
-                        updateDoc(database.vote(vote.id), { value: downvote }).then(() => console.log("downvoted")).catch(() => console.log("error"))
-                    }
+                        console.log("unvoted");
+                    })
                 }
-                else
+                else if (vote.value == upvote)
                 {
-                    await setDoc(database.vote(newId),
-                    {
-                        id: newId,
-                        userId: currentUser.uid,
-                        postId: post.id,
-                        value: downvote
-                    }).then(() => console.log("set votes")).catch(() => console.log("error"))
+                    updateDoc(database.vote(vote.id), { value: downvote }).then(() => console.log("downvoted")).catch(() => console.log("error"))
                 }
-            break;
-            default: return;
-        }
+            }
+            else
+            {
+                await setDoc(database.vote(newId),
+                {
+                    id: newId,
+                    userId: currentUser.uid,
+                    postId: post.id,
+                    value: downvote
+                }).then(() => console.log("set votes")).catch(() => console.log("error"))
+            }
+        break;
+        default: return;
     }
+  }
 
     const handlePostDelete = async () =>
     {

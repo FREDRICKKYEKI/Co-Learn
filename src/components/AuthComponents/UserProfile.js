@@ -17,9 +17,8 @@ export const UserProfile = () =>
   const userData = state.user;
   const { currentUser } = useAuth();
   const navigate = useNavigate()
+  
 
-  if(userData&&currentUser.uid == userData.id)
-    navigate("/profile")
   
   useEffect(() => 
   {
@@ -30,8 +29,9 @@ export const UserProfile = () =>
   }, [userData.interests])
 
   useEffect(() => {
-
-    // console.log({currentuser: currentUser.uid, user: userData.id})
+    if (!currentUser) return
+    if (userData&&currentUser.uid == userData.id)
+      navigate("/profile")
   }, [])
   
   

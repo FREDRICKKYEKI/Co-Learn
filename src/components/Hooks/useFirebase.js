@@ -81,7 +81,11 @@ export const useFirebase = (spaceId = null, uid = null, postId = null) =>
     //get comments by post id
     useEffect(() =>
     {
-        if (postId == null) return;
+        if (postId == null)
+        {
+            dispatch({type: ACTIONS.SET_LOADING, payload:{loading: false}})
+            return;
+        }
         const q = query(commentsRef, where("postId", "==", postId), orderBy("timestamp","desc"));
 
         return onSnapshot(q, (querySnap) =>
@@ -100,7 +104,11 @@ export const useFirebase = (spaceId = null, uid = null, postId = null) =>
     //get votes by post id
     useEffect(() => 
     {
-        if(postId == null) return;
+        if(postId == null)
+        {
+            dispatch({type: ACTIONS.SET_LOADING, payload:{loading: false}})
+            return;
+        }
         const q = query(votesRef, where("postId","==",postId));
         
         return onSnapshot(q, (querySnap) =>
@@ -118,7 +126,11 @@ export const useFirebase = (spaceId = null, uid = null, postId = null) =>
     //get posts by learning space id
     useEffect(() =>
     {
-        if(spaceId == null) return;
+        if(spaceId == null) 
+        {
+            dispatch({type: ACTIONS.SET_LOADING, payload:{loading: false}})
+            return;
+        }
             const q = query(postsRef, where("spaceId","==",spaceId,), orderBy("timestamp","desc"));
             
         return onSnapshot(q, (querySnap) => 
@@ -134,7 +146,11 @@ export const useFirebase = (spaceId = null, uid = null, postId = null) =>
     //get user by uid
     useEffect(() =>
     {
-        if(uid == null) return;
+        if(uid == null) 
+        {
+            dispatch({type: ACTIONS.SET_LOADING, payload:{loading: false}})
+            return
+        };
         const usersDocRef = database.user(uid);
 
         return onSnapshot(usersRef, () =>
@@ -169,7 +185,11 @@ export const useFirebase = (spaceId = null, uid = null, postId = null) =>
     //get learning space by space id
     useEffect(() =>
     {
-        if(spaceId == null) return;
+        if(spaceId == null) 
+        {
+            dispatch({type: ACTIONS.SET_LOADING, payload:{loading: false}})
+            return;
+        }
         const spacesDocRef = database.learningSpace(spaceId)
 
         return onSnapshot(spacesRef,() =>

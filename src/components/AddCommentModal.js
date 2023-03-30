@@ -8,44 +8,48 @@ import { Modal } from './Modal'
 import { uuidv4 } from '@firebase/util'
 import { useAuth } from './Contexts/AuthProvider'
 import { PostProfile } from './PostProfile'
-import { useCurrentDBUser, UserContext } from './LearningSpace'
-import { useFirebase } from './Hooks/useFirebase'
+import { useSpaceContext } from './LearningSpace'
 
 export const AddCommentModal = ({ open, setOpen, postAuthor, postData }) =>
 {
     const { currentUser } = useAuth();
     const [value, setValue] = useState();
     const [loading, setLoading] = useState(false);
-    const { user } = useCurrentDBUser();
+    const { user } = useSpaceContext();
 
     
     useEffect(() => { return () => setLoading(false); },[open])
     
     const handleAddComment = async () =>
     {
-        setLoading(true);
-        const commentId = uuidv4();
-        await setDoc(database.comment(commentId),
-        {
-            id: commentId,
-            commentAuthor: currentUser.uid,
-            postId: postData.id,
-            comment: value,
-            timestamp: serverTimestamp()
-        },
-        {merge: true})
-        .then(() =>
-        {
-            setOpen(false);
-            setLoading(false);
-            alert("✔ Comment successfully added.");
-        })
-        .catch(() =>
-        {
-            setOpen(false);
-            setLoading(false);
-            alert("Oops😥, Something went wrong. Please try again");
-        })
+      if (!currentUser)
+      {
+        alert("Oops😥, you are not joined. Please join the learning spaceto be able to contribute.");
+        return;
+      }
+      setLoading(true);
+      const commentId = uuidv4();
+      await setDoc(database.comment(commentId),
+      {
+        id: commentId,
+        commentAuthor: currentUser.uid,
+        postId: postData.id,
+        comment: value,
+        timestamp: serverTimestamp()
+      },
+      {merge: true})
+      .then(() =>
+      {
+          setOpen(false);
+          setLoading(false);
+          alert("✔ Comment successfully added.");
+      })
+      .catch(() =>
+      {
+          setOpen(false);
+          setLoading(false);
+          alert("Oops😥, Something went wrong. Please try again");
+      })
     }
 
   return (
@@ -83,7 +87,7 @@ export const AddCommentModal = ({ open, setOpen, postAuthor, postData }) =>
             />
           </div>
           <button
-            disabled={!value}
+            disabled={!value&&!currentUser}
             onClick={() => handleAddComment()}
             style={{ width: "max-content" }}
             className="submitBtn"

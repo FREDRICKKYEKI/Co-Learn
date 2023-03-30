@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import MDEditor from '@uiw/react-md-editor';
 import { useFirebase } from './Hooks/useFirebase';
-import moment from 'moment';
 import { PostFooter } from './PostFooter';
 import { CommentSection } from './CommentSection';
 import { PostProfile } from './PostProfile';
 import { AdminMark } from './AdminMark';
+
+import { useSpaceContext } from './LearningSpace';
 
 export const Post = ({  post, spaceData }) => 
 {
@@ -16,13 +17,13 @@ export const Post = ({  post, spaceData }) =>
   const [openComments, setOpenComments] = useState(false)
   const comments = state.comments;
 
-  
+
   useEffect(() => { setUser(state.user); }, [state.user])
+
 
   return (
     <>
       {state && user && (
-        <>
           <div key={post.id} className="post-card">
             <AdminMark isAdmin={isAdmin} />
             <PostProfile user={user} timestamp={post.timestamp} />
@@ -46,7 +47,6 @@ export const Post = ({  post, spaceData }) =>
               />
             )}
           </div>
-        </>
       )}
     </>
   );
