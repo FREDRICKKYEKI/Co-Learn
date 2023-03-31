@@ -10,6 +10,7 @@ body{
 }
 .container {
     margin: 3rem;
+    min-height: 70vh;
 }
 
 .current-user

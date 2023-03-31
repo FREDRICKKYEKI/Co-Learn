@@ -12,7 +12,8 @@ import { doc, updateDoc } from 'firebase/firestore'
 import { Link } from 'react-router-dom'
 import { LoadingScreen } from './LoadingScreen'
 import { SideModal } from './SideModal'
-import './styles/space.css'
+import './styles/space.css';
+
 
 export const SpaceContext = createContext();
 
@@ -20,6 +21,7 @@ export function useSpaceContext() { return useContext(SpaceContext) }
 
 export const LearningSpace = () =>
 {
+  const [active, setActive] = useState();
   const navigate = useNavigate();
   const { spaceId } = useParams();
   const { currentUser } = useAuth();
@@ -32,13 +34,14 @@ export const LearningSpace = () =>
   );
   const spaceData = state.space;
   const posts = state.posts;
-
   var btnText = currentUser ? (joined ? "Leave" : "Join") : "Sign up join";
   const isAdmin = currentUser ? spaceData.admin == currentUser.uid : false;
   const members = spaceData.members;
   var users = spaceData.users;
   const [openSideModal, setOpenModal] = useState(false);
+  const [openHighlightModal, setOpenHLModal] = useState(false)
   const [highlights, setHighlights] = useState([]);
+  const [modalValue, setValue] = useState()
 
   const joinSpace = (e) => {
     e.stopPropagation();
@@ -48,6 +51,7 @@ export const LearningSpace = () =>
       handleJoinLeave();
     } else alert("⚠ Admin cannot leave learning space!");
   };
+
 
   const handleJoinLeave = () => {
     setLoading(true);
@@ -105,6 +109,12 @@ export const LearningSpace = () =>
             setOpenModal,
             highlights,
             setHighlights,
+            openHighlightModal, 
+            setOpenHLModal,
+            active,
+            setActive,
+            modalValue, 
+            setValue
           }}
         >
           <div className="container">
@@ -143,7 +153,7 @@ export const LearningSpace = () =>
               <Posts spaceData={spaceData} posts={posts} />
               <Users spaceData={spaceData} />
             </main>
-            <RelatedSpaces />
+            {/* <RelatedSpaces /> */}
           </div>
           {openSideModal && (
             <SideModal open={openSideModal} setOpen={setOpenModal} />

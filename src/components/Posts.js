@@ -13,11 +13,12 @@ import "rangy/lib/rangy-highlighter";
 import "rangy/lib/rangy-serializer";
 import rangy from "rangy";
 import { useSpaceContext } from './LearningSpace';
+import { HighlightModal } from './HighlightModal';
 
 export const Posts = ({spaceData, posts}) =>
 {
   rangy.init();
-  const { openSideModal, setOpenModal, highlights, setHighlights } = useSpaceContext();
+  const {openHighlightModal, setOpenHLModal, setOpenModal, highlights, setHighlights, active, setActive } = useSpaceContext();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Post something...");
   const [loading, setLoading] = useState(false);
@@ -28,6 +29,7 @@ export const Posts = ({spaceData, posts}) =>
   const isMember = currentUser?spaceMembers&&spaceMembers.includes(currentUser.uid):false;
   const [styles, setStyles] = useState({ color: "white" });
   var highlightsArr = [];
+  
 
   const handleSubmitForm = async (e) => 
   {
@@ -100,29 +102,32 @@ export const Posts = ({spaceData, posts}) =>
     });
     highlighter.addClassApplier(classApplier);
     highlighter.highlightSelection("highlight");
-    var selTxt = rangy.getSelection().toString();
     let selection = rangy.getSelection();
-    let range = selection.getRangeAt(0);
+    const selTxt = selection.toString().trim();
     rangy.getSelection().removeAllRanges();
-
+    setActive(selTxt)
     const highlightData = {
-      id: id,
-      text: selTxt.toString(),
-      annot: ""
+    id: id,
+    text: selTxt.toString(),
+    annot: ""
     };
     highlightsArr = highlights;
     highlightsArr.push(highlightData);
     setHighlights(highlightsArr);
-
+    openModal()
   }
  
-  const onHighlightClick = (event) =>
+  const openModal = () =>
   {
-    event.preventDefault();
-    setOpenModal(true);
-    
-  };
+    setOpenHLModal(true);
+  }
 
+  const onHighlightClick = (e) =>
+  {
+    e.stopPropagation();
+    setOpenModal(true);
+    setActive(e.target.innerText);
+  };
   return (
     <div className="posts-container">
       <h3>Posts({posts.length})</h3>
@@ -170,6 +175,7 @@ export const Posts = ({spaceData, posts}) =>
           )}
         </div>
       </form>
+      <HighlightModal open={openHighlightModal} setOpen={setOpenHLModal}/>
     </div>
   );
 }

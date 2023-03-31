@@ -15,7 +15,7 @@
     background-size:cover;
     background-repeat: repeat;
     height: 100vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font);
     height: 100vh;
     max-height: max-content;
     display: flex;
@@ -72,7 +72,7 @@ form #header
 {
     color: var(--formColor);
     opacity: .4;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font);
 }
 
 

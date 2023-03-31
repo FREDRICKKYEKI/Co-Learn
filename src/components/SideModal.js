@@ -22,7 +22,6 @@ export const SideModal = ({open, setOpen}) =>
     }
 
   }, [open])
-  console.log(open)
   const closeModal = (e) => 
   {
     e.stopPropagation();

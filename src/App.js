@@ -14,6 +14,7 @@ import { CreateLearningSpace } from './components/CreateLearningSpace';
 import { DragDropFile } from './components/DragDropFile';
 import { UserProfile } from './components/AuthComponents/UserProfile';
 import { SideModal } from './components/SideModal';
+import { Footer } from './components/Footer';
 
 const LazyProfile = React.lazy(() => import('./components/AuthComponents/Profile')) 
 
@@ -43,6 +44,7 @@ function App() {
           <Route path="/learningspace/:spaceId" element={<LearningSpace />} />
           <Route path="/createlearningspace" element={<RequireAuth><CreateLearningSpace/></RequireAuth>} />
         </Routes>
+      {!excludedRoutes.includes(location.pathname) && <Footer/>}
       </AuthProvider>
     </>
   );

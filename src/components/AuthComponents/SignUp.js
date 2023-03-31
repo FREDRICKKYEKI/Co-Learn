@@ -92,7 +92,7 @@ export const SignUp = () => {
         if(passRef.current.type==="password")
         {
             passRef.current.type="text";
-            eyeRef.current.style ="color:orange";
+            eyeRef.current.style ="color: var(--secondary)";
         }else
         {
             eyeRef.current.style ="color:black";
@@ -109,7 +109,8 @@ export const SignUp = () => {
             <div className='load-logo center'>
                 <i className="fa fa-book-open-reader fa-4x"></i>
             </div>
-            <h1 id='header'>Sign Up</h1>
+            <h2 style={{margin:"unset", color:"var(--secondary)"}}>Co learn</h2>
+            <h2 style={{marginBottom:"unset", color:"white"}} id='header'>Sign Up</h2>
             {error&&
                 <ErrorAlert>{error}</ErrorAlert>
             }

@@ -80,11 +80,12 @@ export const LogIn = () =>
     
     return (
     <div className='main-div'>
-        <form onSubmit={(e)=>handleLogIn(e)}  id="form">
+        <form onSubmit={(e) => handleLogIn(e)}  id="form">
             <div className='load-logo center mb-2'>
                 <i className="fa fa-book-open-reader fa-4x"></i>
             </div>
-            <h1 id='header'>Log In</h1>
+            <h2 style={{margin:"unset", color:"var(--secondary)"}}>Co learn</h2>
+            <h2 style={{marginBottom:"unset", color:"white"}} id='header'>Log in</h2>
             {error&&
                 <ErrorAlert>{error}</ErrorAlert>}
 
@@ -115,11 +116,11 @@ export const LogIn = () =>
             </div>
             <div id="socials-container">
                 <span title='Log in with Google' onClick={()=>logInGoogle()}>
-                    <i className="fa-brands fa-google"></i>
+                    <i  className="fa-brands fa-google"></i>
                     <div className='flare'></div>
                 </span>
                 <span title='Log in with Facebook/Meta' onClick={()=>logInFacebook()}>
-                    <i className="fa-brands fa-facebook-f"></i>
+                    <i  className="fa-brands fa-facebook-f"></i>
                     <div className='flare'></div>
                 </span>            
             </div>

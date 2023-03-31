@@ -12,10 +12,13 @@ export const NavBar = () =>
   return (
     <>
       <div className = 'navbar'>
-        <NavLink to = '/'>          
-          <h1 className = "logo">
-              <i className = "fa fa-book-open-reader card-logo"></i>
-          </h1>
+        <NavLink to = '/'>       
+          <div className = "logo">
+              <i className = "fa fa-book-open-reader card-logo fa-3x"></i>
+              <h2>
+                Co-Learn
+              </h2>
+          </div>
         </NavLink>
         <input type = "checkbox" id = "nav-toggle" className = "nav-toggle"/>
         <nav>

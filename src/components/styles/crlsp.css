@@ -166,3 +166,11 @@ outline: none;
     width: 100%;
     cursor: pointer;
 }
+
+@media screen and (max-width:500px)
+{
+    .crlsp-card
+    {
+        margin: .5rem;
+    }
+}

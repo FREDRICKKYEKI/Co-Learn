@@ -134,9 +134,9 @@
     overflow: scroll;
     width: 0px;
     height: 100%;
-    padding: 0px;
+    padding: .5rem !important;
     border-radius: unset;
-    animation: slide-left 0.2s ease-out both;
+    animation: slide-left 0.3s ease-out;
 }
 
 .side-modal::-webkit-scrollbar
