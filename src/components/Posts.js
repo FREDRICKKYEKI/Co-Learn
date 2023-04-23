@@ -133,7 +133,8 @@ export const Posts = ({spaceData, posts}) =>
       <h3>Posts({posts.length})</h3>
       <div ref={postRef} className="posts">
         <HighlightPop
-          popoverItems={(itemClass) => (
+			className="highlight-div"
+			popoverItems={(itemClass) => (
             <>
               <span className={itemClass} onClick={() => onHighlightAction()}>
                 <i style={styles} className="fa fa-highlighter"></i>
@@ -145,9 +146,7 @@ export const Posts = ({spaceData, posts}) =>
           {posts.length > 0 ? (
             <>
               {posts.map((post) => (
-                <>
                   <Post key={post.id} post={post} spaceData={spaceData} />
-                </>
               ))}
             </>
           ) : (

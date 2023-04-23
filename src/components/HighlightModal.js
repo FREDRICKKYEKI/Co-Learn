@@ -15,7 +15,7 @@ export const HighlightModal = ({ open, setOpen, }) => {
           <Highlight setOpen={setOpen} userObj={user} highlightObj={highlights} forSide={false} />
         </Modal>
       ) : (
-        alert("Please sign in to be able to annotate your highlights.")
+        open&&alert("Please sign in to be able to annotate your highlights.")
       )}
     </>
   );

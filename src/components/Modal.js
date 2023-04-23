@@ -1,18 +1,11 @@
 import React, {useEffect} from 'react'
-import ReactDOM  from 'react-dom'
 import './styles/modal.css'
 
 export const Modal = ({open, setOpen, children}) => 
 {
-  useEffect(() => 
-  {
-    if(open)
-    document.body.classList.toggle("overflow-h");
-    else
-    document.body.classList.toggle("overflow-h");
 
-  }, [open])
-  
+open?document.body.style = "overflow-y: hidden":document.body.style = "overflow-y: scroll"
+
   const closeModal = (e) =>
   {
     e.stopPropagation();
@@ -24,14 +17,13 @@ export const Modal = ({open, setOpen, children}) =>
 
   return (
     <>
-        {ReactDOM.createPortal(open&&
-            <div className='overlay'>
-                <div className='modal'>
-                  <i onClick={(e)=>{ closeModal(e) }} className='fa fa-times cancel' />
-                    {children}
-                </div>
-            </div>
-        ,document.body)}
+        {open&&(
+			<div className='overlay'>
+				<div className='modal'>
+				<i onClick={(e)=>{ closeModal(e) }} className='fa fa-times cancel' />
+					{children}
+				</div>
+			</div>)}
     </>
   )
 }

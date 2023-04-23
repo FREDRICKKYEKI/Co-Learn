@@ -74,6 +74,8 @@
   max-height: 5rem;
   border: unset;
   font-weight: 800;
+  border-top: #ccc 1px solid;
+  border-radius: 12px;
 }
 .annot textarea::placeholder
 {

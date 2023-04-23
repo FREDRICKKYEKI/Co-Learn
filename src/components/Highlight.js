@@ -15,7 +15,6 @@ export const Highlight = ({ userObj, highlightObj, forSide, setOpen }) =>
         return { ...hlight, annot: modalValue };
       return hlight;
     }
-    // else alert("Ooops😥, something went wrong. Please try again."); window.location.reload();
   });
   
   return (

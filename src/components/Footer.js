@@ -7,19 +7,21 @@ export const Footer = () =>
 		<footer className='footer-container'>
 			<section className='section'>
 				<i className='fa fa-book-open-reader load-icon fa-4x'/>
-				<h2 style={{margin:"unset"}}>Co-Learn</h2>
+				<h3 style={{margin:"unset"}}>Co-Learn</h3>
 				<a href="fredrickisaac142@gmail.com">
 					@By Fredrick Isaac
 				</a>
 			</section>
 			<hr style={{width:"100%"}}/>
 			<section className='section'>
-				<h2 style={{margin:"unset"}}>Important links</h2>
-				<Link to="/">Home</Link>
-				<Link to="/createlearningspace">Create Learning space</Link>
-				<Link to="/profile">Profile</Link>
-				<Link to="/login">LogIn</Link>
-				<Link to="/signup">Sign up</Link>
+				<div className='footer-links'>
+					<h3 style={{marginTop:"unset"}}>Important links</h3>
+					<Link to="/">Home</Link>
+					<Link to="/createlearningspace">Create space</Link>
+					<Link to="/profile">Profile</Link>
+					<Link to="/login">LogIn</Link>
+					<Link to="/signup">Sign up</Link>
+				</div>
 			</section>
 			<hr style={{width:"100%"}}/>
 			<section>

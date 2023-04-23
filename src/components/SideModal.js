@@ -8,20 +8,11 @@ export const SideModal = ({open, setOpen}) =>
 {
   const { user } = useSpaceContext()
   const modalRef = useRef();
-  const { highlights, setHighlights } = useSpaceContext();
+  const { highlights } = useSpaceContext();
     
-  useEffect(() => 
-  {
-    if(open)
-    {
-      document.body.classList.toggle("overflow-h");
-    }
-    else
-    {
-      document.body.classList.toggle("overflow-h");
-    }
 
-  }, [open])
+  open?document.body.style = "overflow-y: hidden":document.body.style = "overflow-y: scroll"
+
   const closeModal = (e) => 
   {
     e.stopPropagation();
@@ -33,7 +24,7 @@ export const SideModal = ({open, setOpen}) =>
 
   return (
     <div>
-        {ReactDOM.createPortal(
+        {/* {ReactDOM.createPortal( */}
             <div onClick={(e)=>{ closeModal(e) }}  className='side-modal-overlay '>
                 <div ref={modalRef} className='side-modal open-modal'>
                   <i onClick={(e)=>{ closeModal(e) }} className='fa fa-times cancel' />
@@ -45,7 +36,7 @@ export const SideModal = ({open, setOpen}) =>
                   </div>
                 </div>
             </div>
-        ,document.body)}
+        {/* ,document.body)} */}
     </div>
   )
 }

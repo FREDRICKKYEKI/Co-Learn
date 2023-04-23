@@ -71,12 +71,11 @@ export const PostFooter = ({ post, setOpenComments, OpenComments, comments }) =>
                 {
                     await deleteDoc(database.vote(vote.id)).then(()=>
                     {
-                        console.log("unvoted");
                     });
                 }
                 else if(vote.value == downvote) 
                 {
-                    updateDoc(database.vote(vote.id), { value: upvote }).then(() =>console.log("upvoted")).catch(() =>console.log("error"))
+                    updateDoc(database.vote(vote.id), { value: upvote })
                 }
             }
             else
@@ -88,7 +87,7 @@ export const PostFooter = ({ post, setOpenComments, OpenComments, comments }) =>
                     postId: post.id,
                     value: upvote
 
-                },{ merge: true }).catch((e) => console.log(e))
+                },{ merge: true })
             }
         break;
         case downvote:
@@ -96,14 +95,11 @@ export const PostFooter = ({ post, setOpenComments, OpenComments, comments }) =>
             {
                 if(vote.value == downvote)
                 {
-                    await deleteDoc(database.vote(vote.id)).then(()=>
-                    {
-                        console.log("unvoted");
-                    })
+                    await deleteDoc(database.vote(vote.id))
                 }
                 else if (vote.value == upvote)
                 {
-                    updateDoc(database.vote(vote.id), { value: downvote }).then(() => console.log("downvoted")).catch(() => console.log("error"))
+                    updateDoc(database.vote(vote.id), { value: downvote })
                 }
             }
             else
@@ -114,17 +110,13 @@ export const PostFooter = ({ post, setOpenComments, OpenComments, comments }) =>
                     userId: currentUser.uid,
                     postId: post.id,
                     value: downvote
-                }).then(() => console.log("set votes")).catch(() => console.log("error"))
+                })
             }
         break;
         default: return;
     }
   }
 
-    const handlePostDelete = async () =>
-    {
-        // await deleteDoc(database.posts(post.id));
-    }
     useEffect(() => {
         getVotes();
     }, [votes])
@@ -164,7 +156,7 @@ export const PostFooter = ({ post, setOpenComments, OpenComments, comments }) =>
           <i className="fa-solid fa-lg fa-ellipsis icon"></i>
           {open && (
             <span className="pop-up">
-            <div onClick={() => handlePostDelete()} className='opt-delete'>
+            <div className='opt-delete'>
               <i className="fa fa-trash" />
               <strong>Delete</strong>
             </div>

@@ -310,6 +310,7 @@ text-align: center;
     position: relative;
     border: 1px solid #ccc;
     border-bottom: 3px #ccc solid;
+	margin-bottom: 10px;
 }
 .sticky{
     position: sticky;
